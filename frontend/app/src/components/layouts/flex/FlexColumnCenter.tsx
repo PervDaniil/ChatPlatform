@@ -8,7 +8,7 @@ interface Props {
 
 export default function FlexColumnCenter({ children, styles }: Props) {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', ...styles}}>
+        <div style={{ display: 'flex', width: '100%', flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', ...styles}}>
             { children }
         </div>
     )

@@ -8,7 +8,7 @@ interface Props {
 
 export default function FlexCenter({ children, styles }: Props) {
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', ...styles}}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', width: '100%', ...styles}}>
             { children }
         </div>
     )
