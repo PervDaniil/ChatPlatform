@@ -22,17 +22,24 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
             primary: {
                 main: '#0095f6',
             },
+            secondary: {
+                main: '#666',
+            },
             background: {
-                paper: '#000000',
+                paper: '#101010',
                 default: '#0a0a0a',
             },
             text: {
+                primary: '#ececec',
                 secondary: '#777',
-            }
+            },
+            success: {
+                main: '#00ff00'
+            },
         },
         typography: {
-            fontFamily: 'Montserrat'
-        }
+            fontFamily: 'Montserrat',
+        },
     });
 
     return (
