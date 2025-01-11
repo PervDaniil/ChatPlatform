@@ -11,7 +11,7 @@ export default function Header() {
                 <Toolbar>
                     <Avatar src="https://randomuser.me/api/portraits/men/20.jpg" sx={{ mr: 5, width: '2.5em', height: '2.5em' }} />
                     <Box flex="1">
-                        <Typography variant="h6" color="white">DjangoDev</Typography>
+                        <Typography variant="h6" color="white" fontFamily="Bruno Ace">DjangoDev</Typography>
                         <Typography variant="body2" color="textSecondary">Last seen 21 minutes ago</Typography>
                     </Box>
                     <FlexRow styles={{ gap: '0 0.75em' }}>

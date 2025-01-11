@@ -21,5 +21,5 @@ export default function ChatPage() {
 }
 
 const styles = {
-    gridLayout: { display: 'grid', gridTemplateColumns: {xs: '0px 1fr', md: '420px 1fr'}}
+    gridLayout: { display: 'grid', gridTemplateColumns: {xs: '0px 1fr', md: '440px 1fr'}}
 }

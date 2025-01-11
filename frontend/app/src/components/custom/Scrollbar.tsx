@@ -2,13 +2,21 @@ import React from "react";
 import { Box } from "@mui/material";
 
 
-export default function Scrollbar({ children }: { children: React.ReactNode }) {
+interface Props {
+    children: React.ReactNode,
+    onlyHover?: boolean,
+    height?: string,
+}
+
+export default function Scrollbar({ children, onlyHover, height }: Props) {
     return (
         <Box sx={{
-            height: '100%', width: '100%',
-            overflow: 'hidden', "&:hover": { overflowY: 'scroll' },
-            '* ::-webkit-scrollbar': { width: '6px' },
-            '* ::-webkit-scrollbar-thumb': { background: 'deepskyblue', borderRadius: '32px' }
+            width: '100%',
+            height: height ? height : '85vh', 
+            "&:hover": { overflowY: 'scroll' },
+            overflowY: onlyHover ? 'hidden' : 'scroll',
+            '&::-webkit-scrollbar': { width: '6px' },
+            '&::-webkit-scrollbar-thumb': { background: theme => theme.palette.primary.main, borderRadius: '32px' }
         }}>
             {children}
         </Box>

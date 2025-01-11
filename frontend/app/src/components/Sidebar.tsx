@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BadgeDot from "./custom/Badge.tsx";
+import Scrollbar from "./custom/Scrollbar.tsx";
 import FlexCenter from "./layouts/flex/FlexCenter.tsx";
 import RoundedTextField from "./custom/RoundedTextField.tsx";
 import { Notifications as NotificationsIcon, Menu as MenuIcon, Search } from '@mui/icons-material';
@@ -8,19 +9,16 @@ import { Drawer, Box, List, ListItem, ListItemAvatar, ListItemText, Avatar, Icon
 
 export default function Sidebar() {
     const styles = {
-        main: { height: '100vh', maxWidth: '420px', overflow: 'hidden', display: { xs: 'none', md: 'flex'} },
-        list: { width: '420px' },
+        wrapper: { height: '100vh', minWidth: '440px', maxWidth: '440px', overflow: 'hidden' },
     }
 
     return (
-        <Drawer variant="permanent">
-            <Box sx={styles.main}>
-                <List sx={styles.list}>
-                    <SidebarHeader />
-                    <SidebarSearch />
-                    <SidebarSettingsTab />
-                    <SidebarChats />
-                </List>
+        <Drawer variant="permanent" sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={styles.wrapper}>
+                <SidebarHeader />
+                <SidebarSearch />
+                <SidebarSettingsTab />
+                <SidebarChats />
             </Box>
         </Drawer>
     )
@@ -29,144 +27,126 @@ export default function Sidebar() {
 
 const SidebarHeader = () => {
     return (
-        <ListItem>
-            <ListItemAvatar>
-                <BadgeDot badgeColor="success">
-                    <Avatar sx={{ width: '2.75em', height: '2.75em' }} src="https://images.datacamp.com/image/upload/v1657018082/Python_snake_c7d86ba58b.jpg" />
-                </BadgeDot>
-            </ListItemAvatar>
-            <ListItemText>
-                <Typography variant="h6" align="center" color="default" fontFamily="Bruno Ace" fontWeight="600">
-                    Chats
-                </Typography>
-            </ListItemText>
-            <Box>
-                <IconButton>
-                    <NotificationsIcon />
-                </IconButton>
-                <IconButton>
-                    <MenuIcon />
-                </IconButton>
-            </Box>
-        </ListItem>
+        <Box pt={1}>
+            <ListItem>
+                <ListItemAvatar>
+                    <BadgeDot badgeColor="success">
+                        <Avatar sx={{ width: '2.75em', height: '2.75em' }} src="https://images.datacamp.com/image/upload/v1657018082/Python_snake_c7d86ba58b.jpg" />
+                    </BadgeDot>
+                </ListItemAvatar>
+                <ListItemText>
+                    <Typography variant="h6" align="center" color="textSecondary" fontFamily="Bruno Ace" fontWeight="600">
+                        Chats
+                    </Typography>
+                </ListItemText>
+                <Box>
+                    <IconButton sx={{ color: '#999' }}>
+                        <NotificationsIcon />
+                    </IconButton>
+                    <IconButton sx={{ color: '#999' }}>
+                        <MenuIcon />
+                    </IconButton>
+                </Box>
+            </ListItem>
+        </Box>
     )
 }
 
 const SidebarSearch = () => {
     return (
-        <ListItem>
-            <RoundedTextField size="small" placeholder="Search ..."
-                startAdornment={
-                    <InputAdornment position="start">
-                        <IconButton>
-                            <Search color="secondary" />
-                        </IconButton>
-                    </InputAdornment>
-                } styles={{
-                    '& .MuiOutlinedInput-root': { py: 0.5, fontWeight: 200, px: 1.5 }, pt: 2,
-                    '& .MuiInputBase-input::placeholder': { fontSize: '1em' }
-                }} />
-        </ListItem>
+        <Box>
+            <ListItem>
+                <RoundedTextField size="small" placeholder="Search ..."
+                    startAdornment={
+                        <InputAdornment position="start">
+                            <IconButton>
+                                <Search color="secondary" />
+                            </IconButton>
+                        </InputAdornment>
+                    } styles={{
+                        '& .MuiOutlinedInput-root': { py: 0.5, fontWeight: 200, px: 1.5 }, pt: 2,
+                        '& .MuiInputBase-input::placeholder': { fontSize: '1em' }
+                    }} />
+            </ListItem>
+        </Box>
     )
 }
 
-
 const SidebarChats = () => {
-    const MockUsers = [
-        {
-            image: "https://randomuser.me/api/portraits/men/55.jpg",
-            name: "DjangoDev",
-            lastMessage: "Last message",
-            time: "Mon",
-            fullTime: "10:26 PM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/men/43.jpg",
-            name: "Ramazan",
-            lastMessage: "Jabjik №1",
-            time: "Tue",
-            fullTime: "05:32 AM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/men/53.jpg",
-            name: "P. Diddy",
-            lastMessage: "Hello EHSP-1-24",
-            time: "Tue",
-            online: true,
-            fullTime: "05:32 AM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/men/48.jpg",
-            name: "Mr. Kumar",
-            lastMessage: "The best teacher",
-            time: "Tue",
-            fullTime: "05:32 AM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/women/51.jpg",
-            name: "Jane Smith",
-            lastMessage: "How's it going?",
-            time: "Wed",
-            fullTime: "08:15 PM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/men/13.jpg",
-            name: "Alex Johnson",
-            lastMessage: "See you soon",
-            time: "Thu",
-            fullTime: "03:45 PM"
-        },
-        {
-            image: "https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg?w=1250",
-            name: "D. Trump",
-            lastMessage: "Good morning",
-            time: "Fri",
-            online: true,
-            fullTime: "07:10 AM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/men/25.jpg",
-            name: "Samuel",
-            lastMessage: "What's up?",
-            time: "Sat",
-            fullTime: "11:02 PM"
-        },
-        {
-            image: "https://randomuser.me/api/portraits/men/6.jpg",
-            name: "Peter Parker",
-            lastMessage: "How have you been?",
-            time: "Sun",
-            online: true,
-            fullTime: "02:58 AM"
-        },
-    ];
-
-
     return (
-        <>
-            {MockUsers.map((user, index) => (
-                <ListItem key={index} sx={{
-                    '&:hover': {
-                        background: 'rgba(0, 0, 0, 0.25)',
-                    }, transition: 'all 0.1s'
-                }}>
-                    <ListItemAvatar>
-                        <Badge color="success" variant="dot" invisible={!user.online} anchorOrigin={{ vertical: 'bottom' }}>
-                            <Avatar src={user.image} />
-                        </Badge>
-                    </ListItemAvatar>
-                    <ListItemText>
-                        <Typography variant="body1">{user.name}</Typography>
-                        <Typography variant="body2" color="textSecondary">
-                            {user.lastMessage}
+        <Box>
+            <Scrollbar onlyHover={true} height="70vh">
+                <List>
+                    {MockUsers.map((user, index) => (
+                        <ListItem
+                            key={index}
+                            sx={{
+                                '&:hover': {
+                                    cursor: 'pointer',
+                                    background: 'rgba(0, 0, 0, 0.25)',
+                                    borderRadius: '12px',
+                                },
+                                transition: 'all 0.1s',
+                            }}
+                        >
+                            <ListItemAvatar>
+                                <Badge
+                                    color="success"
+                                    variant="dot"
+                                    invisible={!user.online}
+                                    anchorOrigin={{ vertical: 'bottom' }}
+                                >
+                                    <Avatar src={user.image} />
+                                </Badge>
+                            </ListItemAvatar>
+                            <ListItemText>
+                                <Typography variant="body1">{user.name}</Typography>
+                                <Typography variant="body2" color="textSecondary">
+                                    {user.lastMessage}
+                                </Typography>
+                            </ListItemText>
+                            <Typography variant="body2" color="textSecondary" align="right">
+                                {user.time}
+                            </Typography>
+                        </ListItem>
+                    ))}
+                </List>
+            </Scrollbar>
+        </Box>
+    );
+};
+
+
+const SidebarChats2 = () => {
+    return (
+        <Box>
+            <List>
+                {MockUsers.map((user, index) => (
+                    <ListItem key={index} sx={{
+                        '&:hover': {
+                            cursor: 'pointer',
+                            background: 'rgba(0, 0, 0, 0.25)',
+                            borderRadius: '12px',
+                        }, transition: 'all 0.1s'
+                    }}>
+                        <ListItemAvatar>
+                            <Badge color="success" variant="dot" invisible={!user.online} anchorOrigin={{ vertical: 'bottom' }}>
+                                <Avatar src={user.image} />
+                            </Badge>
+                        </ListItemAvatar>
+                        <ListItemText>
+                            <Typography variant="body1">{user.name}</Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                {user.lastMessage}
+                            </Typography>
+                        </ListItemText>
+                        <Typography variant="body2" color="textSecondary" align="right">
+                            {user.time}
                         </Typography>
-                    </ListItemText>
-                    <Typography variant="body2" color="textSecondary" align="right">
-                        {user.time}
-                    </Typography>
-                </ListItem>
-            ))}
-        </>
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
     )
 }
 
@@ -179,14 +159,84 @@ const SidebarSettingsTab = () => {
     }
 
     return (
-        <ListItem sx={{ pb: 2}}>
+        <ListItem sx={{ pb: 2 }}>
             <FlexCenter>
                 <Tabs value={tabIndex}>
-                    <Tab value={0} onClick={() => handleChangeTab(0)} label="All" sx={{ fontSize: '0.85em'}}/>
-                    <Tab value={1} onClick={() => handleChangeTab(1)} label="Online" sx={{ fontSize: '0.85em'}} />
-                    <Tab value={2} onClick={() => handleChangeTab(2)} label="Unchecked" sx={{ fontSize: '0.85em'}} />
+                    <Tab value={0} onClick={() => handleChangeTab(0)} label="All" sx={{ fontSize: '0.85em' }} />
+                    <Tab value={1} onClick={() => handleChangeTab(1)} label="Online" sx={{ fontSize: '0.85em' }} />
+                    <Tab value={2} onClick={() => handleChangeTab(2)} label="Unchecked" sx={{ fontSize: '0.85em' }} />
                 </Tabs>
             </FlexCenter>
         </ListItem>
     )
 }
+
+
+const MockUsers = [
+    {
+        image: "https://randomuser.me/api/portraits/men/55.jpg",
+        name: "DjangoDev",
+        lastMessage: "Last message",
+        time: "Mon",
+        fullTime: "10:26 PM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/men/43.jpg",
+        name: "Ramazan",
+        lastMessage: "Jabjik №1",
+        time: "Tue",
+        fullTime: "05:32 AM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/men/53.jpg",
+        name: "P. Diddy",
+        lastMessage: "Hello EHSP-1-24",
+        time: "Tue",
+        online: true,
+        fullTime: "05:32 AM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/men/48.jpg",
+        name: "Mr. Kumar",
+        lastMessage: "The best teacher",
+        time: "Tue",
+        fullTime: "05:32 AM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/women/51.jpg",
+        name: "Jane Smith",
+        lastMessage: "How's it going?",
+        time: "Wed",
+        fullTime: "08:15 PM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/men/13.jpg",
+        name: "Alex Johnson",
+        lastMessage: "See you soon",
+        time: "Thu",
+        fullTime: "03:45 PM"
+    },
+    {
+        image: "https://www.whitehouse.gov/wp-content/uploads/2021/01/45_donald_trump.jpg?w=1250",
+        name: "D. Trump",
+        lastMessage: "Good morning",
+        time: "Fri",
+        online: true,
+        fullTime: "07:10 AM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/men/25.jpg",
+        name: "Samuel",
+        lastMessage: "What's up?",
+        time: "Sat",
+        fullTime: "11:02 PM"
+    },
+    {
+        image: "https://randomuser.me/api/portraits/men/6.jpg",
+        name: "Peter Parker",
+        lastMessage: "How have you been?",
+        time: "Sun",
+        online: true,
+        fullTime: "02:58 AM"
+    },
+];
