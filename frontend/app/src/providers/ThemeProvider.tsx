@@ -36,6 +36,9 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
             success: {
                 main: '#00ff00'
             },
+            error: {
+                main: '#ff0000'
+            },
         },
         typography: {
             fontFamily: 'Montserrat',

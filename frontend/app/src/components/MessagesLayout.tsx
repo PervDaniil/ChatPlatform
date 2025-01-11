@@ -5,15 +5,11 @@ import Scrollbar from "./custom/Scrollbar.tsx";
 
 
 const messages = [
-    { id: 1, sender: "other", text: "Hey, how are you?", timestamp: "10:00 AM" },
-    { id: 2, sender: "me", text: "I'm good, thanks! How about you?", timestamp: "10:05 AM" },
-    { id: 5, sender: "other", text: "I understand! Same here.", timestamp: "10:07 AM" },
-    { id: 5, sender: "other", text: "I understand! Same here.", timestamp: "10:07 AM" },
-    { id: 7, sender: "me", text: "I'm doing well, just busy with work.", timestamp: "10:06 AM" },
-    { id: 7, sender: "me", text: "I'm doing well, just busy with work.", timestamp: "10:06 AM" },
-    { id: 5, sender: "other", text: "I understand! Same here.", timestamp: "10:07 AM" },
-    { id: 7, sender: "me", text: "I'm doing well, just busy with work.", timestamp: "10:06 AM" },
-
+    { id: 1, sender: "other", text: "Hey, how's your semester going?", timestamp: "9:45 AM" },
+    { id: 2, sender: "me", text: "It's going pretty well", timestamp: "9:47 AM" },
+    { id: 3, sender: "other", text: "Same here by the way", timestamp: "9:50 AM" },
+    { id: 3, sender: "other", text: "I have a some midterms coming up.", timestamp: "9:51 AM" },
+    { id: 4, sender: "me", text: "Oh, I feel you! Have you started studying yet?", timestamp: "9:55 AM" },
 ];
 
 export default function MessagesLayout() {
@@ -34,7 +30,7 @@ export default function MessagesLayout() {
                                 <Card elevation={0} sx={styles.message2}>
                                     <Box sx={{ p: 2, pl: 3 }}>
                                         <Typography variant="body1" gutterBottom>{message.text}</Typography>
-                                        <Typography align="right" variant="body2" color="textSecondary">{message.timestamp}</Typography>
+                                        <Typography align="right" variant="body2" color="textSecondary" pt={0.5}>{message.timestamp}</Typography>
                                     </Box>
                                 </Card>
                             )}
@@ -53,7 +49,7 @@ const styles = {
         position: 'relative',
         alignSelf: 'flex-end',
         background: theme => theme.palette.primary.main,
-        width: '340px', height: '70px', borderTopLeftRadius: '1em',
+        width: '340px', minHeight: '70px', borderTopLeftRadius: '1em',
         borderBottomLeftRadius: '0', borderBottomRightRadius: '1em', borderTopRightRadius: '1em',
         '::before': {
             content: '""',
@@ -72,7 +68,7 @@ const styles = {
         alignSelf: 'start',
         overflow: 'visible',
         position: 'relative',
-        width: '340px', height: '70px', borderTopLeftRadius: '1em',
+        width: '340px', minHeight: '70px', borderTopLeftRadius: '1em',
         borderBottomLeftRadius: '1em', borderBottomRightRadius: '0em', borderTopRightRadius: '1em', '::before': {
             content: '""',
             right: '-12px',

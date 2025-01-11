@@ -10,9 +10,11 @@ interface Props {
 
 export default function Scrollbar({ children, onlyHover, height }: Props) {
     return (
-        <Box sx={{
+        <Box className="scrollContainer" 
+        sx={{
             width: '100%',
-            height: height ? height : '85vh', 
+            'scrollBehavior' : 'smooth',
+            height: height ? height : '90vh', 
             "&:hover": { overflowY: 'scroll' },
             overflowY: onlyHover ? 'hidden' : 'scroll',
             '&::-webkit-scrollbar': { width: '6px' },

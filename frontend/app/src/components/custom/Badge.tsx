@@ -9,8 +9,10 @@ interface Props {
 
 export default function BadgeDot({ children, badgeColor }: Props) {
     return (
-        <MUIBadge variant="dot" color={badgeColor} sx={{
+        <MUIBadge variant="dot" anchorOrigin={{ vertical: 'bottom'} } color={badgeColor} sx={{
             '& .MuiBadge-dot': {
+                left: '70%',
+                top: '70%',
                 width: '1em', 
                 height: '1em', 
                 borderRadius: '50%', 
