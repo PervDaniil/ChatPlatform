@@ -43,7 +43,7 @@ export default function MessagesLayout() {
                                 </Box>
                             </Card>
                         ) : (
-                            <Card sx={{
+                            <Card elevation={0} sx={{
                                 overflow: 'visible',
                                 position: 'relative',
                                 width: '340px', height: '70px', borderTopLeftRadius: '1em',
@@ -56,7 +56,7 @@ export default function MessagesLayout() {
                                     borderLeft: '20px solid transparent', 
                                     borderRight: '20px solid transparent', 
                                     borderTop: '20px solid', 
-                                    borderTopColor: '#1c1c1c',
+                                    borderTopColor: '#101010',
                                 },
                             }}>
                                 <Box sx={{ p: 2, pl: 3 }}>

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import BadgeDot from "./custom/Badge.tsx";
+import FlexCenter from "./layouts/flex/FlexCenter.tsx";
+import RoundedTextField from "./custom/RoundedTextField.tsx";
 import { Notifications as NotificationsIcon, Menu as MenuIcon, Search } from '@mui/icons-material';
-import { Drawer, Box, List, ListItem, ListItemAvatar, ListItemText, Avatar, IconButton, Typography, TextField, InputAdornment, Badge } from "@mui/material";
+import { Drawer, Box, List, ListItem, ListItemAvatar, ListItemText, Avatar, IconButton, Typography, InputAdornment, Badge, Tabs, Tab } from "@mui/material";
 
 
 export default function Sidebar() {
     const styles = {
-        main: { height: '100vh', maxWidth: '420px' },
+        main: { height: '100vh', maxWidth: '420px', overflow: 'hidden', display: { xs: 'none', md: 'flex'} },
         list: { width: '420px' },
     }
 
@@ -16,6 +18,7 @@ export default function Sidebar() {
                 <List sx={styles.list}>
                     <SidebarHeader />
                     <SidebarSearch />
+                    <SidebarSettingsTab />
                     <SidebarChats />
                 </List>
             </Box>
@@ -29,11 +32,11 @@ const SidebarHeader = () => {
         <ListItem>
             <ListItemAvatar>
                 <BadgeDot badgeColor="success">
-                    <Avatar sx={{ width: '2.75em', height: '2.75em'}} src="https://images.datacamp.com/image/upload/v1657018082/Python_snake_c7d86ba58b.jpg" />
+                    <Avatar sx={{ width: '2.75em', height: '2.75em' }} src="https://images.datacamp.com/image/upload/v1657018082/Python_snake_c7d86ba58b.jpg" />
                 </BadgeDot>
             </ListItemAvatar>
             <ListItemText>
-                <Typography variant="h6" align="center" color="textSecondary">
+                <Typography variant="h6" align="center" color="default" fontFamily="Bruno Ace" fontWeight="600">
                     Chats
                 </Typography>
             </ListItemText>
@@ -49,24 +52,20 @@ const SidebarHeader = () => {
     )
 }
 
-
 const SidebarSearch = () => {
     return (
         <ListItem>
-            <TextField
-                fullWidth
-                size="small"
-                placeholder="Search..."
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <IconButton>
-                                <Search color="secondary" />
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                }}
-                sx={{ '& .MuiInputBase-root': { borderRadius: '32px', py: 0.5, background: 'rgba(0, 0, 0, 0.25)', fontWeight: 200 }, py: 2, '& *': { transition: 'all 0.2s' } }} />
+            <RoundedTextField size="small" placeholder="Search ..."
+                startAdornment={
+                    <InputAdornment position="start">
+                        <IconButton>
+                            <Search color="secondary" />
+                        </IconButton>
+                    </InputAdornment>
+                } styles={{
+                    '& .MuiOutlinedInput-root': { py: 0.5, fontWeight: 200, px: 1.5 }, pt: 2,
+                    '& .MuiInputBase-input::placeholder': { fontSize: '1em' }
+                }} />
         </ListItem>
     )
 }
@@ -93,6 +92,7 @@ const SidebarChats = () => {
             name: "P. Diddy",
             lastMessage: "Hello EHSP-1-24",
             time: "Tue",
+            online: true,
             fullTime: "05:32 AM"
         },
         {
@@ -121,6 +121,7 @@ const SidebarChats = () => {
             name: "D. Trump",
             lastMessage: "Good morning",
             time: "Fri",
+            online: true,
             fullTime: "07:10 AM"
         },
         {
@@ -135,6 +136,7 @@ const SidebarChats = () => {
             name: "Peter Parker",
             lastMessage: "How have you been?",
             time: "Sun",
+            online: true,
             fullTime: "02:58 AM"
         },
     ];
@@ -143,9 +145,13 @@ const SidebarChats = () => {
     return (
         <>
             {MockUsers.map((user, index) => (
-                <ListItem key={index}>
+                <ListItem key={index} sx={{
+                    '&:hover': {
+                        background: 'rgba(0, 0, 0, 0.25)',
+                    }, transition: 'all 0.1s'
+                }}>
                     <ListItemAvatar>
-                        <Badge color="success" anchorOrigin={{ vertical: 'bottom' }}>
+                        <Badge color="success" variant="dot" invisible={!user.online} anchorOrigin={{ vertical: 'bottom' }}>
                             <Avatar src={user.image} />
                         </Badge>
                     </ListItemAvatar>
@@ -161,5 +167,26 @@ const SidebarChats = () => {
                 </ListItem>
             ))}
         </>
+    )
+}
+
+
+const SidebarSettingsTab = () => {
+    const [tabIndex, setTabIndex] = useState<number>(0);
+
+    const handleChangeTab = (tabId: number) => {
+        setTabIndex(tabId);
+    }
+
+    return (
+        <ListItem sx={{ pb: 2}}>
+            <FlexCenter>
+                <Tabs value={tabIndex}>
+                    <Tab value={0} onClick={() => handleChangeTab(0)} label="All" sx={{ fontSize: '0.85em'}}/>
+                    <Tab value={1} onClick={() => handleChangeTab(1)} label="Online" sx={{ fontSize: '0.85em'}} />
+                    <Tab value={2} onClick={() => handleChangeTab(2)} label="Unchecked" sx={{ fontSize: '0.85em'}} />
+                </Tabs>
+            </FlexCenter>
+        </ListItem>
     )
 }
