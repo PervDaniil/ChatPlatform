@@ -10,7 +10,8 @@ ALLOWED_HOSTS = []
 
 
 APPS = [
-    
+    'api.users',
+    'api.chats',
 ]
 
 
