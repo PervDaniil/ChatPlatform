@@ -1,11 +1,10 @@
 import React from "react";
 import Main from "../components/Main.tsx";
 import Header from "../components/Header.tsx";
-import Sidebar from "../components/Sidebar.tsx";
 import { Box, useMediaQuery } from "@mui/material";
 import BottomPanel from "../components/BottomPanel.tsx";
+import Sidebar from "../components/Sidebar/Sidebar.tsx";
 import MessagesLayout from "../components/MessagesLayout.tsx";
-import PreloadBar from "../components/PreloadBar.tsx";
 
 
 export default function ChatPage() {
@@ -34,5 +33,5 @@ export default function ChatPage() {
 }
 
 const styles = {
-    gridLayout: { display: 'grid', gridTemplateColumns: { xs: '0px 1fr', md: '440px 1fr' } }
+    gridLayout: { display: 'grid', gridTemplateColumns: '440px 1fr' }
 }

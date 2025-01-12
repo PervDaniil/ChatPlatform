@@ -1,78 +1,7 @@
-import React, { useState } from "react";
-import BadgeDot from "./custom/Badge.tsx";
-import Scrollbar from "./custom/Scrollbar.tsx";
-import FlexCenter from "./layouts/flex/FlexCenter.tsx";
-import RoundedTextField from "./custom/RoundedTextField.tsx";
-import { Notifications as NotificationsIcon, Menu as MenuIcon, Search } from '@mui/icons-material';
-import { Drawer, Box, List, ListItem, ListItemAvatar, ListItemText, Avatar, IconButton, Typography, InputAdornment, Badge, Tabs, Tab } from "@mui/material";
+import React from "react";
+import Scrollbar from "../custom/Scrollbar.tsx";
+import { Box, List, ListItem, ListItemAvatar, Badge, Avatar, Typography, ListItemText} from '@mui/material';
 
-
-export default function Sidebar() {
-    const styles = {
-        wrapper: { height: '100vh', minWidth: '440px', maxWidth: '440px', overflow: 'hidden' },
-    }
-
-    return (
-        <Drawer variant="permanent" sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Box sx={styles.wrapper}>
-                <SidebarHeader />
-                <SidebarSearch />
-                <SidebarSettingsTab />
-                <SidebarChats />
-            </Box>
-        </Drawer>
-    )
-}
-
-
-const SidebarHeader = () => {
-    return (
-        <Box pt={1}>
-            <ListItem>
-                <ListItemAvatar>
-                    <BadgeDot badgeColor="success">
-                        <Avatar sx={{ width: '2.75em', height: '2.75em' }} src="https://images.datacamp.com/image/upload/v1657018082/Python_snake_c7d86ba58b.jpg" />
-                    </BadgeDot>
-                </ListItemAvatar>
-                <ListItemText>
-                    <Typography variant="h6" align="center" color="textSecondary" fontFamily="Bruno Ace" fontWeight="600">
-                        Chats
-                    </Typography>
-                </ListItemText>
-                <Box>
-                    <IconButton sx={{ color: '#999' }}>
-                        <Badge variant="dot" color="error" >
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    <IconButton sx={{ color: '#999' }}>
-                        <MenuIcon />
-                    </IconButton>
-                </Box>
-            </ListItem>
-        </Box>
-    )
-}
-
-const SidebarSearch = () => {
-    return (
-        <Box>
-            <ListItem>
-                <RoundedTextField size="small" placeholder="Search ..."
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <IconButton>
-                                <Search color="secondary" />
-                            </IconButton>
-                        </InputAdornment>
-                    } styles={{
-                        '& .MuiOutlinedInput-root': { py: 0.5, fontWeight: 200, px: 1.5 }, pt: 2,
-                        '& .MuiInputBase-input::placeholder': { fontSize: '1em' }, '& *': { borderColor: 'rgba(200, 200, 200, 0.085)' }
-                    }} />
-            </ListItem>
-        </Box>
-    )
-}
 
 const SidebarChats = () => {
     return (
@@ -118,27 +47,8 @@ const SidebarChats = () => {
     );
 };
 
+export default SidebarChats;
 
-const SidebarSettingsTab = () => {
-    const [tabIndex, setTabIndex] = useState<number>(0);
-
-    const handleChangeTab = (tabId: number) => {
-        setTabIndex(tabId);
-    }
-
-    return (
-        <ListItem sx={{ pb: 2 }}>
-            <FlexCenter>
-                <Tabs value={tabIndex}>
-                    <Tab value={0} onClick={() => handleChangeTab(0)} label="All" sx={{ fontSize: '0.85em' }} />
-                    <Tab value={1} onClick={() => handleChangeTab(1)} label="Online" sx={{ fontSize: '0.85em' }} />
-                    <Tab value={2} onClick={() => handleChangeTab(2)} label="Inbox" sx={{ fontSize: '0.85em' }} />
-                    <Tab value={3} onClick={() => handleChangeTab(3)} label="New" sx={{ fontSize: '0.85em' }} />
-                </Tabs>
-            </FlexCenter>
-        </ListItem>
-    )
-}
 
 
 const MockUsers = [
