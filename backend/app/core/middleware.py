@@ -1,5 +1,7 @@
-from django.middleware.common import CommonMiddleware
+from channels.middleware import BaseMiddleware
 
 
-class JWTAuthMiddleware():
-    pass
+class JWTAuthMiddleware(BaseMiddleware):
+    async def __call__(self, scope, receive, send):
+        return await super().__call__(scope, receive, send)
+    
