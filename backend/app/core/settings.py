@@ -16,6 +16,7 @@ APPS = [
 
 
 DJANGO_DEPENDENCIES = [
+    'channels',
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
@@ -75,7 +76,13 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'core.wsgi.application'
+ASGI_APPLICATION = 'core.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default' : {
+        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 
 DATABASES = {
