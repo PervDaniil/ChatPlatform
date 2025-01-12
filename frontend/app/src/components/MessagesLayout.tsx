@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
+import Scrollbar from "./custom/Scrollbar.tsx";
 import { Card, Box, Typography } from "@mui/material";
 import FlexColumn from "./layouts/flex/FlexColumn.tsx";
-import Scrollbar from "./custom/Scrollbar.tsx";
 
 
 const messages = [
@@ -20,14 +20,14 @@ export default function MessagesLayout() {
                     {messages.map(message => (
                         <Fragment>
                             {message.sender === 'me' ? (
-                                <Card sx={styles.message}>
+                                <Card key={message.id} sx={styles.message}>
                                     <Box sx={{ p: 2, pl: 3 }}>
                                         <Typography variant="body1" gutterBottom>{message.text}</Typography>
                                         <Typography align="right" variant="body2">{message.timestamp}</Typography>
                                     </Box>
                                 </Card>
                             ) : (
-                                <Card elevation={0} sx={styles.message2}>
+                                <Card key={message.id} elevation={0} sx={styles.message2}>
                                     <Box sx={{ p: 2, pl: 3 }}>
                                         <Typography variant="body1" gutterBottom>{message.text}</Typography>
                                         <Typography align="right" variant="body2" color="textSecondary" pt={0.5}>{message.timestamp}</Typography>
@@ -78,7 +78,7 @@ const styles = {
             borderLeft: '20px solid transparent',
             borderRight: '20px solid transparent',
             borderTop: '20px solid',
-            borderTopColor: '#101010',
+            borderTopColor: theme => theme.palette.background.paper,
         }
     }
 }
