@@ -1,21 +1,40 @@
-from pathlib import Path
+from . import config
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = config.BASE_DIR_PATH
 
-SECRET_KEY = 'django-insecure-o^v$e+!37v8*m+tcr$*64v30wo1!7j+u+ldbx@=lxbxqn$1mik'
+SECRET_KEY = config.SECRET_KEY
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
 
-INSTALLED_APPS = [
+APPS = [
+    
+]
+
+
+DJANGO_DEPENDENCIES = [
+    'corsheaders',
+    'rest_framework',
+    'rest_framework_simplejwt',
+]
+
+
+DJANGO_DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+
+INSTALLED_APPS = [
+    *APPS,
+    *DJANGO_DEPENDENCIES,
+    *DJANGO_DEFAULT_APPS,
 ]
 
 
