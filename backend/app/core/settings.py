@@ -76,6 +76,13 @@ TEMPLATES = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
 ASGI_APPLICATION = 'core.asgi.application'
 
 CHANNEL_LAYERS = {
