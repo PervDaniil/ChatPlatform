@@ -1,4 +1,5 @@
 import React from 'react';
+import HomePage from './pages/HomePage.tsx';
 import ChatPage from './pages/ChatPage.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
@@ -13,7 +14,8 @@ export default function App() {
 			<ThemeProvider>
 				<Router>
 					<Routes>
-						<Route path='/' element={<ChatPage />} />
+						<Route path='/' element={<HomePage />} />
+						<Route path='/chat' element={<ChatPage />} />
 						<Route path='/login' element={<LoginPage />} />
 						<Route path='/register' element={<RegisterPage />} />
 					</Routes>
