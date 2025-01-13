@@ -68,6 +68,7 @@ const styles = {
         alignSelf: 'start',
         overflow: 'visible',
         position: 'relative',
+        
         width: '340px', minHeight: '70px', borderTopLeftRadius: '1em',
         borderBottomLeftRadius: '1em', borderBottomRightRadius: '0em', borderTopRightRadius: '1em', '::before': {
             content: '""',

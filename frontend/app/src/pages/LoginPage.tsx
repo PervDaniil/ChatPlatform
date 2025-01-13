@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Home as HomeIcon } from "@mui/icons-material";
 import FlexCenter from "../components/layouts/flex/FlexCenter.tsx";
 import { Box, Button, Card, TextField, Typography, Fab } from "@mui/material";
 import FlexColumnCenter from "../components/layouts/flex/FlexColumnCenter.tsx";
+import { AuthContext } from "../providers/AuthProvider/AuthProvider.tsx";
 
 
 interface FormData {
@@ -11,24 +12,50 @@ interface FormData {
 }
 
 export default function LoginPage() {
+    const { setAccessToken, setRefreshToken } = useContext(AuthContext);
     const [formData, setFormData] = useState<FormData>({
         username: '',
         password: '',
     });
 
-    const HandleInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+    const HandleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
 
         setFormData((data) => ({
             ...data,
-            [name] : value,
+            [name]: value,
         }));
     }
 
     const HandleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log(event);
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/v1/token/obtain/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const responseBody = await response.json();
+
+                if (response.ok) {
+                    console.log(responseBody);
+                    setAccessToken(responseBody.access);
+                    setRefreshToken(responseBody.refresh);
+                    return
+                }
+                
+                throw new Error(`Invalid credentials!`);
+            } catch (error) {
+                console.log(error.message);
+            }
+        }
+
+        fetchData();
     }
 
     return (
@@ -40,17 +67,17 @@ export default function LoginPage() {
                         <Typography variant="h4" pb={1}>Login page</Typography>
                         <FlexColumnCenter styles={{ gap: '1em 0', padding: '4em 0' }}>
                             <TextField onChange={HandleInputChange} name="password" required size="small" fullWidth label="Password" />
-                            <TextField onChange={HandleInputChange} name="email" size="small" fullWidth label="Username" />
+                            <TextField onChange={HandleInputChange} name="username" size="small" fullWidth label="Username" />
                         </FlexColumnCenter>
-                        <Button fullWidth size="large" variant="contained" sx={{ mt: 6.5 }}>Submit!</Button>
+                        <Button type="submit" fullWidth size="large" variant="contained" sx={{ mt: 6.5 }}>Submit!</Button>
                     </FlexColumnCenter>
                 </Card>
             </FlexCenter>
 
-            <Fab 
-            color="primary" 
-            onClick={() => window.location.href = '/'}
-            sx={{ position: 'absolute', bottom: '2em', left: '2em'}}>
+            <Fab
+                color="primary"
+                onClick={() => window.location.href = '/'}
+                sx={{ position: 'absolute', bottom: '2em', left: '2em' }}>
                 <HomeIcon />
             </Fab>
         </Box>
