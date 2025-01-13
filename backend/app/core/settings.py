@@ -1,3 +1,4 @@
+from datetime import timedelta
 from . import config
 
 BASE_DIR = config.BASE_DIR_PATH
@@ -127,5 +128,11 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME' : timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME' : timedelta(days=7),
+    "SIGNING_KEY": config.SECRET_KEY,
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
