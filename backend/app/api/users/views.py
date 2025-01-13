@@ -39,3 +39,10 @@ class RegisterUserView(APIView):
             return Response({'info' : 'Internal server Error!'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
 
+class UserCredentials(APIView):
+    def get(self, request):
+        credentials = {
+            'id' : request.user.id,
+            'username' : request.user.username,
+        }
+        return Response({'user' : credentials}, status=status.HTTP_200_OK)
