@@ -6,6 +6,7 @@ class Chat(models.Model):
     name = models.CharField(max_length=128, blank=False)
     private = models.BooleanField(default = False)
     members = models.ManyToManyField('users.CustomUser')
+    image = models.ImageField(upload_to='chats/avatars/', blank=True, null=True)
     
     @property
     def amount_of_members(self):
