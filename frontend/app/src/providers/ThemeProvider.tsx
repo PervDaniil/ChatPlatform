@@ -7,7 +7,7 @@ interface ThemeContextValue {
     HandleThemeMode: () => void,
 }
 
-const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextValue>({ mode: 'dark', HandleThemeMode() {} });
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
@@ -46,7 +46,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
     });
 
     return (
-        <ThemeContext.Provider value={{ mode: themeMode, HandleThemeMode}}>
+        <ThemeContext.Provider value={{ mode: themeMode, HandleThemeMode }}>
             <MUIThemeProvider theme={UserTheme}>
                 <CssBaseline />
                 { children } 
