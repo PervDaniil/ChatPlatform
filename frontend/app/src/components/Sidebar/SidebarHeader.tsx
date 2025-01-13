@@ -1,10 +1,9 @@
-
-import React, {useState} from "react";
+import { Box, ListItem, ListItemAvatar, ListItemText, IconButton, Typography, Badge, Avatar } from '@mui/material';
+import { Notifications as NotificationsIcon, Menu as MenuIcon } from '@mui/icons-material';
+import SettingsTabLayout from "./SettingsTabLayout.tsx";
 import BadgeDot from "../custom/Badge.tsx";
-import FlexColumn from "../layouts/flex/FlexColumn.tsx";
-import FlexColumnCenter from "../layouts/flex/FlexColumnCenter.tsx";
-import { Notifications as NotificationsIcon, Menu as MenuIcon, KeyboardBackspace as BackArrowIcon, DarkMode } from '@mui/icons-material';
-import { Box, ListItem, ListItemAvatar, ListItemText, IconButton, Button, Typography, Badge, ListItemIcon, Avatar, Switch, List, Card } from '@mui/material';
+import React, { useState } from "react";
+
 
 
 const SidebarHeader = () => {
@@ -16,7 +15,7 @@ const SidebarHeader = () => {
 
     return (
         <Box pt={1} sx={{ position: 'relative' }}>
-            {open && <SettingsTabLayout closeLayout={HandleOpen} />}
+            <SettingsTabLayout closeLayout={HandleOpen} isOpen={open} />
             <ListItem>
                 <ListItemAvatar>
                     <BadgeDot badgeColor="success">
@@ -39,39 +38,6 @@ const SidebarHeader = () => {
                     </IconButton>
                 </Box>
             </ListItem>
-        </Box>
-    )
-}
-
-
-
-const SettingsTabLayout = ({ closeLayout }) => {
-    return (
-        <Box width="100%" height="100vh" position="absolute" elevation={0} zIndex={999} component={Card}>
-            <FlexColumnCenter styles={{ flexWrap: 'nowrap', height: '100vh'}}>
-                <Box width="100%" py={1}>
-                    <IconButton onClick={closeLayout}>
-                        <BackArrowIcon />
-                    </IconButton>
-                </Box>
-                <Box flex="1" width="100%" pt={1}>
-                    <List>
-                        <ListItem>
-                            <ListItemIcon>
-                                <DarkMode />
-                            </ListItemIcon>
-                            <Typography flex="1" color="textSecondary">Dark mode</Typography>
-                            <Switch defaultChecked />
-                        </ListItem>
-                    </List>
-                </Box>
-                <Box px={3} pb={5} width="100%">
-                    <FlexColumn styles={{ gap: '1em 0'}}>
-                        <Button size="large" variant="outlined" fullWidth>Logout</Button>
-                        <Button size="large" variant="contained" fullWidth>Login</Button>
-                    </FlexColumn>
-                </Box>
-            </FlexColumnCenter>
         </Box>
     )
 }
