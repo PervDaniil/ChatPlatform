@@ -26,12 +26,12 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
                 main: '#666',
             },
             background: {
-                paper: '#101010',
-                default: '#0a0a0a',
+                paper: themeMode === 'dark' ? '#101010' : '#eee',
+                default: themeMode === 'dark' ? '#0a0a0a' : '#fff',
             },
             text: {
-                primary: '#ececec',
-                secondary: '#777',
+                primary: themeMode === 'dark' ? '#ececec' : '#000',
+                secondary: themeMode === 'dark' ? '#777' : '#999',
             },
             success: {
                 main: '#00ff00'
