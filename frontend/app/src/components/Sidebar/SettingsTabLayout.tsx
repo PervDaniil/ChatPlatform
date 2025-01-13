@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import React, { useContext } from "react";
 import FlexColumn from "../layouts/flex/FlexColumn.tsx";
-import { ThemeContext } from '../../providers/ThemeProvider.tsx'
 import FlexColumnCenter from "../layouts/flex/FlexColumnCenter.tsx";
+import { ThemeContext } from '../../providers/ThemeProvider/ThemeProvider.tsx';
 import { KeyboardBackspace as BackArrowIcon, DarkMode, Animation as AnimationIcon, Notifications as NotificationsIcon } from '@mui/icons-material';
 import { Box, ListItem, IconButton, Button, Typography, ListItemIcon, Switch, List, Card, Divider } from '@mui/material';
 

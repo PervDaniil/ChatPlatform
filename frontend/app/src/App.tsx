@@ -2,8 +2,8 @@ import React from 'react';
 import ChatPage from './pages/ChatPage.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
-import ThemeProvider from './providers/ThemeProvider.tsx';
 import AuthProvider from './providers/AuthProvider/AuthProvider.tsx';
+import ThemeProvider from './providers/ThemeProvider/ThemeProvider.tsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 

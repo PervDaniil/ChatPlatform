@@ -1,13 +1,12 @@
-import React, { createContext, useState } from 'react';
 import { ThemeProvider as MUIThemeProvider, CssBaseline, createTheme } from '@mui/material';
+import React, { createContext, useState } from 'react';
+import { ThemeContextProviderValue } from './types.ts';
 
 
-interface ThemeContextValue {
-    mode: 'dark' | 'light',
-    HandleThemeMode: () => void,
-}
-
-export const ThemeContext = createContext<ThemeContextValue>({ mode: 'dark', HandleThemeMode() {} });
+export const ThemeContext = createContext<ThemeContextProviderValue>({ 
+    mode: 'dark',
+    HandleThemeMode() {} 
+});
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [themeMode, setThemeMode] = useState<'dark' | 'light'>('dark');
