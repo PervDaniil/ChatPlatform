@@ -1,8 +1,10 @@
 import FlexColumnCenter from "../components/layouts/flex/FlexColumnCenter.tsx";
 import { Box, Button, Card, TextField, Typography, Fab } from "@mui/material";
+import { AuthContext } from "../providers/AuthProvider/AuthProvider.tsx";
 import FlexCenter from "../components/layouts/flex/FlexCenter.tsx";
 import { Home as HomeIcon } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 interface FormData {
@@ -12,6 +14,8 @@ interface FormData {
 
 
 export default function RegisterPage() {
+    const navigate = useNavigate();
+    const { setAccessToken, setRefreshToken } = useContext(AuthContext);
     const [formData, setFormData] = useState<FormData>({
         username: '',
         password: '',
@@ -34,19 +38,20 @@ export default function RegisterPage() {
                 const response = await fetch('http://127.0.0.1:8000/api/v1/token/register/', {
                     method: 'POST',
                     headers: {
-                        'Content-Type' : 'application/json',
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData)
                 });
-                
+
                 const responseBody = await response.json();
 
                 if (response.ok) {
                     console.log(responseBody);
+                    setAccessToken(responseBody.access);
+                    setRefreshToken(responseBody.refresh);
+                    navigate('/');
                     return
-                }   
-
-                throw new Error(`Failed to fetch! Response code : ${response.status} ${responseBody.info}`);
+                }
             } catch (error) {
                 console.log(error.message);
             }
@@ -61,12 +66,12 @@ export default function RegisterPage() {
                 <Card component="form" elevation={0} onSubmit={HandleSubmit}
                     sx={{ px: 4, py: 5, boxShadow: 10, minWidth: '400px', border: '1px solid #222' }}>
                     <FlexColumnCenter>
-                        <Typography variant="h4" pb={1}>Register page</Typography>
+                        <Typography variant="h4" py={2.5}>Register page</Typography>
                         <FlexColumnCenter styles={{ gap: '1em 0', padding: '2.5em 0' }}>
                             <TextField onChange={HandleInputChange} name="username" required size="small" fullWidth label="Username" />
                             <TextField onChange={HandleInputChange} name="password" required size="small" fullWidth label="Password" />
                         </FlexColumnCenter>
-                        <Button type="submit" fullWidth size="large" variant="contained" sx={{ mt: 6.5 }}>Submit!</Button>
+                        <Button type="submit" fullWidth size="large" variant="contained" sx={{ mt: 7.5 }}>Submit!</Button>
                     </FlexColumnCenter>
                 </Card>
             </FlexCenter>

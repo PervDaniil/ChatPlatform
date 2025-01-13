@@ -4,6 +4,7 @@ import FlexCenter from "../components/layouts/flex/FlexCenter.tsx";
 import { Box, Button, Card, TextField, Typography, Fab } from "@mui/material";
 import FlexColumnCenter from "../components/layouts/flex/FlexColumnCenter.tsx";
 import { AuthContext } from "../providers/AuthProvider/AuthProvider.tsx";
+import { useNavigate } from "react-router-dom";
 
 
 interface FormData {
@@ -12,6 +13,7 @@ interface FormData {
 }
 
 export default function LoginPage() {
+    const navigate = useNavigate();
     const { setAccessToken, setRefreshToken } = useContext(AuthContext);
     const [formData, setFormData] = useState<FormData>({
         username: '',
@@ -46,6 +48,7 @@ export default function LoginPage() {
                     console.log(responseBody);
                     setAccessToken(responseBody.access);
                     setRefreshToken(responseBody.refresh);
+                    navigate('/');
                     return
                 }
                 
@@ -64,12 +67,15 @@ export default function LoginPage() {
                 <Card component="form" elevation={0} onSubmit={HandleSubmit}
                     sx={{ px: 4, py: 5, boxShadow: 10, minWidth: '400px', border: '1px solid #222' }}>
                     <FlexColumnCenter>
-                        <Typography variant="h4" pb={1}>Login page</Typography>
+                        <Typography variant="h4" pt={1}>Login page</Typography>
                         <FlexColumnCenter styles={{ gap: '1em 0', padding: '4em 0' }}>
                             <TextField onChange={HandleInputChange} name="password" required size="small" fullWidth label="Password" />
-                            <TextField onChange={HandleInputChange} name="username" size="small" fullWidth label="Username" />
+                            <TextField onChange={HandleInputChange} name="username" required size="small" fullWidth label="Username" />
+                            <Typography component="a" href="/register" variant="body2" color="textSecondary" sx={{ textDecoration: 'none'}}>
+                                Don't have an account?
+                            </Typography>
                         </FlexColumnCenter>
-                        <Button type="submit" fullWidth size="large" variant="contained" sx={{ mt: 6.5 }}>Submit!</Button>
+                        <Button type="submit" fullWidth size="large" variant="contained" sx={{ mt: 4 }}>Submit!</Button>
                     </FlexColumnCenter>
                 </Card>
             </FlexCenter>
