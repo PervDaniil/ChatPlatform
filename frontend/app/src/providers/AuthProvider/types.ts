@@ -5,6 +5,7 @@ export interface User {
 
 export interface AuthProviderContextValue {
     user: User | null,
+    logout: () => void,
     setAccessToken: (access: string) => void,
     setRefreshToken: (refresh: string) => void,
 }

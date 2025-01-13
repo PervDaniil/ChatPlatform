@@ -4,6 +4,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<AuthProviderContextValue>({
     user: null,
+    logout() {},
     setAccessToken(access: string) {},
     setRefreshToken(refresh: string) {},
 });
@@ -17,6 +18,11 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
     const setRefreshToken = (refresh: string) => localStorage.setItem('refresh', refresh);
     const getRefreshToken = () => localStorage.getItem('refresh');
+
+    const logout = () => {
+        localStorage.removeItem('access');
+        localStorage.removeItem('refresh');
+    }
 
 
     useEffect(() => {
@@ -76,7 +82,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
 
     return (
-        <AuthContext.Provider value={{ user, setAccessToken, setRefreshToken }}>
+        <AuthContext.Provider value={{ user, logout, setAccessToken, setRefreshToken }}>
             { children }
         </AuthContext.Provider>
     )
