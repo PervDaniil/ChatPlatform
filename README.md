@@ -1,0 +1,1 @@
+![screencapture-localhost-3000-chat-2025-01-14-19_55_01](https://github.com/user-attachments/assets/3a8ef4ce-d550-4616-af8a-b64076f934d5)
