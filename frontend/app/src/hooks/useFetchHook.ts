@@ -33,7 +33,6 @@ export default function useFetchRequest({ url, body, headers, method }: Params):
             
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(response, data);
                     setData(data);
                 }   
                 throw new Error(`Failed to fetch! Response code : ${response.status}`)

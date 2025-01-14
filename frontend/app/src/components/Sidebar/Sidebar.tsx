@@ -1,9 +1,8 @@
-import React from "react";
-import { Drawer, Box } from "@mui/material";
-import SidebarChats from "./SidebarChats.tsx";
+import SidebarTabsMenu from "./SidebarTabsMenu.tsx";
 import SidebarHeader from "./SidebarHeader.tsx";
 import SidebarSearch from "./SidebarSearch.tsx";
-import SidebarTabsMenu from "./SidebarTabsMenu.tsx";
+import { Drawer, Box } from "@mui/material";
+import React from "react";
 
 
 export default function Sidebar() {
@@ -13,7 +12,6 @@ export default function Sidebar() {
                 <SidebarHeader />
                 <SidebarSearch />
                 <SidebarTabsMenu />
-                <SidebarChats />
             </Box>
         </Drawer>
     )

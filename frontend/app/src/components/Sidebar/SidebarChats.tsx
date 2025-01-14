@@ -1,9 +1,15 @@
-import React from "react";
-import Scrollbar from "../custom/Scrollbar.tsx";
 import { Box, List, ListItem, ListItemAvatar, Badge, Avatar, Typography, ListItemText} from '@mui/material';
+import useFetchRequest from "../../hooks/useFetchHook.ts";
+import Scrollbar from "../custom/Scrollbar.tsx";
+import React from "react";
 
 
 const SidebarChats = () => {
+    const { loading, error, data } = useFetchRequest({
+        url: 'http://127.0.0.1:8000/api/v3/chats/',
+        method: 'GET',
+    });
+
     return (
         <Box>
             <Scrollbar onlyHover={true} height="calc(70vh + 20px)">

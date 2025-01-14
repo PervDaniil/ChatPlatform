@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import FlexCenter from "../layouts/flex/FlexCenter.tsx";
 import { Box, ListItem, Tab, Tabs, Typography, } from '@mui/material';
+import CreateNewChatTab from './Tabs/CreateNewChatTab.tsx';
+import FlexCenter from "../layouts/flex/FlexCenter.tsx";
+import SidebarChats from './SidebarChats.tsx';
+import React, { useState } from "react";
 
 
 const SidebarTabsMenu = () => {
@@ -24,10 +26,10 @@ const SidebarTabsMenu = () => {
             </ListItem>
 
             <Box>
-                {/* {tabIndex === 0 && <SidebarChats />} */}
+                {tabIndex === 0 && <SidebarChats />}
                 {tabIndex === 1 && <Typography>Online Content</Typography>}
                 {tabIndex === 2 && <Typography>Inbox Content</Typography>}
-                {tabIndex === 3 && <Typography>New Content</Typography>}
+                {tabIndex === 3 && <CreateNewChatTab />}
             </Box>
         </Box>
     );
