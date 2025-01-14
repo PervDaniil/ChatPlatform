@@ -5,6 +5,20 @@ from rest_framework.views import APIView
 from api.chats.models import Chat
 
 
+class ChatView(APIView):
+    def get(self, request):
+        pass
+    
+    def post(self, request):
+        pass
+    
+    def put(self, request):
+        pass
+    
+    def delete(self, request):
+        pass
+
+
 class ChatsListViewSet(ListAPIView):
     queryset = Chat.objects.filter(private=False)
     serializer_class = ChatModelSerializer
@@ -16,3 +30,4 @@ class SearchChatView(APIView):
         queryset = Chat.objects.filter(name__icontains=search_param)
         serializer = ChatModelSerializer(queryset, many=True)
         return Response(serializer.data)
+    
