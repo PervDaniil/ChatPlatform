@@ -5,6 +5,7 @@ import React, { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext<AuthProviderContextValue>({
     user: null,
     logout() {},
+    getAccessToken: () => null,
     setAccessToken(access: string) {},
     setRefreshToken(refresh: string) {},
 });
@@ -82,7 +83,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
 
     return (
-        <AuthContext.Provider value={{ user, logout, setAccessToken, setRefreshToken }}>
+        <AuthContext.Provider value={{ user, logout, getAccessToken, setAccessToken, setRefreshToken }}>
             { children }
         </AuthContext.Provider>
     )

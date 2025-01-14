@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 
-interface Params {
+export interface Params {
     url: string,
     body?: object,
     headers?: object,
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
 }
 
-interface FetchResult {
+export interface FetchResult {
     loading: boolean,
     error: string | null,
     data: JSON | null,
@@ -34,8 +34,10 @@ export default function useFetchRequest({ url, body, headers, method }: Params):
                 if (response.ok) {
                     const data = await response.json();
                     setData(data);
-                }   
-                throw new Error(`Failed to fetch! Response code : ${response.status}`)
+                    
+                } else {
+                    throw new Error(`Failed to fetch! Response code : ${response.status}`)
+                }
         
             } catch (error) {
                 setError(error.message);

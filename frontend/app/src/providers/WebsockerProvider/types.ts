@@ -1,7 +1,10 @@
 import React from "react";
 
 export interface Message {
+    id: number,
+    time: string,
     text: string,
+    sender: string,
 }
 
 export interface WebsocketContextProviderValue {
