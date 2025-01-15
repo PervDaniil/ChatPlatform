@@ -1,16 +1,27 @@
 import { Box, List, ListItem, ListItemAvatar, Badge, Avatar, Typography, ListItemText } from '@mui/material';
 import useFetchChats from '../../hooks/useFetchChatsHook.ts';
 import Scrollbar from "../custom/Scrollbar.tsx";
-import React, { useContext} from "react";
+import React from "react";
+
 
 interface User {
     id: number
     name: string;
-    time: string;
     image: string;
     online: boolean;
-    lastMessage: string;
+    last_login: string;
 }
+
+interface Chat {
+    user: User,
+    id: number,
+    name: string,
+    time: string,
+    image: string,
+    members: User[],
+    lastMessage: string,
+}
+
 
 const SidebarChats = () => {
     const { loading, error, data } = useFetchChats();
@@ -21,9 +32,9 @@ const SidebarChats = () => {
         <Box>
             <Scrollbar onlyHover={true} height="calc(70vh + 20px)">
                 <List>
-                    {/* {data.map((user: User) => (
+                    {/* {data && data.map((chat: Chat) => (
                         <ListItem
-                            key={user.id}
+                            key={chat.id}
                             sx={{
                                 '&:hover': {
                                     cursor: 'pointer',
@@ -37,20 +48,20 @@ const SidebarChats = () => {
                                 <Badge
                                     color="success"
                                     variant="dot"
-                                    invisible={!user.online}
+                                    invisible={!chat.user.online}
                                     anchorOrigin={{ vertical: 'bottom' }}
                                 >
-                                    <Avatar src={user.image} />
+                                    <Avatar src={chat.user.image} />
                                 </Badge>
                             </ListItemAvatar>
                             <ListItemText>
-                                <Typography variant="body1">{user.name}</Typography>
+                                <Typography variant="body1">{chat.user.name}</Typography>
                                 <Typography variant="body2" color="textSecondary">
-                                    {user.lastMessage}
+                                    {chat.lastMessage}
                                 </Typography>
                             </ListItemText>
                             <Typography variant="body2" color="textSecondary" align="right">
-                                {user.time}
+                                {chat.time}
                             </Typography>
                         </ListItem>
                     ))} */}

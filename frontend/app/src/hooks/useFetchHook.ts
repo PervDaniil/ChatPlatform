@@ -48,7 +48,7 @@ export default function useFetchRequest({ url, body, headers, method }: Params):
         }
 
         fetchData();
-    }, [url, body, headers, method]);
+    }, []);
 
     return { loading, error, data };
 }

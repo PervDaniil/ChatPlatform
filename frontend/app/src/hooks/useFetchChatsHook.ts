@@ -1,15 +1,19 @@
+import { AuthContext } from '../providers/AuthProvider/AuthProvider.tsx';
 import useFetchRequest from './useFetchHook.ts';
 import { FetchResult } from './useFetchHook.ts';
+import { useContext } from 'react';
 
 
 export default function useFetchChats(): FetchResult {
+    const { accessToken } = useContext(AuthContext);
+
     const { loading, error, data } = useFetchRequest({
         method: 'GET',
         url: 'http://127.0.0.1:8000/api/v3/chats/',
-        // headers: {
-        //     'Authorization': `Bearer ${accessToken}`,
-        // },
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+        },
     });
-
+    
     return { loading, error, data };
 }
