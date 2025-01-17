@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Profile(models.Model):
+    online = models.BooleanField(default=False)
     image = models.ImageField(upload_to='profile/avatars/', blank=True, null=True)
     
 
