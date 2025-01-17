@@ -21,10 +21,6 @@ export default function WebsocketProvider({ children } : { children : React.Reac
         webSocket.onmessage = (event) => {
             console.log('Received a message from websocket', JSON.parse(event.data))
         }
-
-        return () => {
-            webSocket.close();
-        }
     });
 
     return (

@@ -11,7 +11,7 @@ export interface Params {
 export interface FetchResult {
     loading: boolean,
     error: string | null,
-    data: JSON | null,
+    data: any,
 }
 
 export default function useFetchRequest({ url, body, headers, method }: Params): FetchResult {
