@@ -36,9 +36,6 @@ class ChatView(APIView):
         return Response({'info' : f'Chat between {request.user.username} and {user2.username} created successfully!'},
                         status=status.HTTP_201_CREATED)
             
-    def put(self, request):
-        pass
-    
     def delete(self, request):
         chat_id = request.data.get('chat_id')
         

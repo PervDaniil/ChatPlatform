@@ -20,8 +20,8 @@ class Message(models.Model):
     id = models.BigAutoField(primary_key = True)
     text = models.TextField(blank=False)
     time = models.DateTimeField(auto_now_add=True)
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
-    sender = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages')
+    sender = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE, related_name='messages')
     
     def __str__(self):
         return f'Message in {self.chat.name} by {self.sender.username}'
