@@ -4,6 +4,8 @@ from api.chats.models import Chat, Message
 
 
 class ChatMessagesSerializer(ModelSerializer):
+    sender = CustomUserModelSerializer()
+
     class Meta:
         model = Message
         fields = ['id', 'text', 'time', 'sender']
