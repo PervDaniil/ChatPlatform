@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import FlexRow from "./layouts/flex/FlexRow.tsx";
 import { Box, Toolbar, Typography, Card, IconButton, Avatar } from "@mui/material";
 import { Videocam as VideoCallIcon, Call as CallIcon, MoreHoriz as MoreHorizIcon } from "@mui/icons-material";
+import { WebsocketContext } from "../providers/WebsocketProvider/WebsocketProvider.tsx";
 
 
 export default function Header() {
+    const { chat } = useContext(WebsocketContext);
+
     return (
         <Box component="header" width="100%">
             <Card elevation={0} sx={{ py: 1 }}>
                 <Toolbar>
                     <Avatar sx={{ mr: 5, width: '2.5em', height: '2.5em' }} />
                     <Box flex="1">
-                        <Typography variant="h6" fontFamily="Bruno Ace">Username</Typography>
+                        <Typography variant="h6" fontFamily="Bruno Ace">{ chat?.name } </Typography>
                         <Typography variant="body2" color="textSecondary">Last seen 21 minutes ago</Typography>
                     </Box>
                     <FlexRow styles={{ gap: '0 1em' }}>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import FlexCenter from "./layouts/flex/FlexCenter.tsx";
 import RoundedTextField from "./custom/RoundedTextField.tsx";
 import { Card, Box, InputAdornment, IconButton } from "@mui/material";
+import { WebsocketContext } from "../providers/WebsocketProvider/WebsocketProvider.tsx";
 import { AttachFile, Mic as MicrophoneIcon, Telegram as SendIcon } from "@mui/icons-material";
 
 
@@ -19,14 +20,25 @@ export default function BottomPanel() {
 
 
 const MessageInputField = () => {
+    const { HandleAddMessage, sendMessage } = useContext(WebsocketContext);
+    const [message, setMessage] = useState<string>('');
+
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setMessage(event.target.value);
+    }
+
     return (
         <RoundedTextField size="medium" placeholder="Type message here ..."
+            onChange={handleInput}
             endAdornment={
                 <InputAdornment position="start" sx={{ gap: '0 0.75em' }}>
                     <IconButton>
                         <MicrophoneIcon color="primary" />
                     </IconButton>
-                    <IconButton sx={{ background: theme => theme.palette.primary.main}}>
+                    <IconButton onClick={() => {
+                        HandleAddMessage(message);
+                        sendMessage(message);
+                    }} sx={{ background: theme => theme.palette.primary.main}}>
                         <SendIcon />
                     </IconButton>
                 </InputAdornment>

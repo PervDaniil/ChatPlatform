@@ -7,14 +7,16 @@ interface Props {
     size: "small" | "medium",
     endAdornment?: React.ReactNode,
     startAdornment?: React.ReactNode,
+    onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>,
     styles?: SxProps,
 }
 
-export default function RoundedTextField({ placeholder, size, startAdornment, endAdornment, styles }: Props) {
+export default function RoundedTextField({ placeholder, size, startAdornment, endAdornment, onChange, styles }: Props) {
     return (
         <TextField
             fullWidth
             size={size}
+            onChange={onChange}
             placeholder={placeholder}
             InputProps={{
                 endAdornment: (

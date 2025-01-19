@@ -6,6 +6,7 @@ import RegisterPage from './pages/RegisterPage.tsx';
 import AuthProvider from './providers/AuthProvider/AuthProvider.tsx';
 import ThemeProvider from './providers/ThemeProvider/ThemeProvider.tsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import WebsocketProvider from './providers/WebsocketProvider/WebsocketProvider.tsx';
 
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
 				<Router>
 					<Routes>
 						<Route path='/' element={<HomePage />} />
-						<Route path='/chat' element={<ChatPage />} />
+						<Route path='/chat' element={<WebsocketProvider><ChatPage /></WebsocketProvider>} />
 						<Route path='/login' element={<LoginPage />} />
 						<Route path='/register' element={<RegisterPage />} />
 					</Routes>

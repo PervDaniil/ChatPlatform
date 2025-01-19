@@ -1,10 +1,19 @@
 import { Box, List, ListItem, ListItemAvatar, Badge, Avatar, Typography, ListItemText } from '@mui/material';
 import useFetchChats from '../../hooks/useFetchChatsHook.ts';
 import Scrollbar from "../custom/Scrollbar.tsx";
-import React from "react";
+import React, { useContext } from "react";
+import { WebsocketContext } from '../../providers/WebsocketProvider/WebsocketProvider.tsx';
 
 
-type Member = {
+export type Message = {
+    id: number,
+    text: string,
+    time: string,
+    sender: Member,
+}
+
+
+export type Member = {
     id: number,
     username: string,
     last_login: string,
@@ -12,22 +21,25 @@ type Member = {
 }
 
 
-type Chat = {
+export type Chat = {
     id: number,
     name: string,
     private: boolean,
     members: Member[],
+    messages: Message[],
     image: string | null,
 }
 
 
 const SidebarChats = () => {
+    const { setChat } = useContext(WebsocketContext);
     const { loading, error, data } = useFetchChats();
 
     const chats = data || [];
 
-    const handleSelectChat = (id: number) => {
-        console.log(`Selected chat number ${id}`)
+    const handleSelectChat = (chat: Chat) => {
+        setChat(chat);
+        console.log(chat);
     }
 
     return (
@@ -37,7 +49,7 @@ const SidebarChats = () => {
                     {chats.map((chat: Chat) => (
                         <ListItem
                             key={chat.id}
-                            onClick={() => handleSelectChat(chat.id)}
+                            onClick={() => handleSelectChat(chat)}
                             sx={{
                                 '&:hover': {
                                     cursor: 'pointer',
