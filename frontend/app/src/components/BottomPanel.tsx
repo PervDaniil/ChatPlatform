@@ -4,6 +4,7 @@ import RoundedTextField from "./custom/RoundedTextField.tsx";
 import { Card, Box, InputAdornment, IconButton } from "@mui/material";
 import { WebsocketContext } from "../providers/WebsocketProvider/WebsocketProvider.tsx";
 import { AttachFile, Mic as MicrophoneIcon, Telegram as SendIcon } from "@mui/icons-material";
+import { AuthContext } from "../providers/AuthProvider/AuthProvider.tsx";
 
 
 export default function BottomPanel() {
@@ -20,24 +21,34 @@ export default function BottomPanel() {
 
 
 const MessageInputField = () => {
-    const { HandleAddMessage, sendMessage } = useContext(WebsocketContext);
-    const [message, setMessage] = useState<string>('');
+    const { user } = useContext(AuthContext);
+    const { setMessage, sendMessage } = useContext(WebsocketContext);
+    const [inputValue, setInputValue] = useState<string>('');
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value);
+        setInputValue(event.target.value);
     }
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter' && message.trim()) {
-            HandleAddMessage(message);
-            sendMessage(message);
-            setMessage('');
+        if (event.key === 'Enter' && inputValue.trim()) {
+            if (user) {
+                setMessage((prev) => ([
+                    ...prev, {
+                        id: 1,
+                        text: inputValue,
+                        time: Date().toString(),
+                        sender: user,
+                    }
+                ]));
+            }
+            sendMessage(inputValue);
+            setInputValue('');
         }
     }
 
     return (
         <RoundedTextField size="medium" placeholder="Type message here ..."
-            value={message}
+            value={inputValue}
             onChange={handleInput}
             onKeyDown={handleKeyDown}
             endAdornment={
@@ -46,9 +57,8 @@ const MessageInputField = () => {
                         <MicrophoneIcon color="primary" />
                     </IconButton>
                     <IconButton onClick={() => {
-                        HandleAddMessage(message);
-                        sendMessage(message);
-                    }} sx={{ background: theme => theme.palette.primary.main}}>
+                        sendMessage(inputValue);
+                    }} sx={{ background: theme => theme.palette.primary.main }}>
                         <SendIcon />
                     </IconButton>
                 </InputAdornment>

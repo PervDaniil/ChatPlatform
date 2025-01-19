@@ -29,9 +29,8 @@ export type Chat = {
 
 export interface WebsocketContextProviderValue {
     chat: Chat | null,
-    messages: string[] | null,
+    messages: Message[] | null,
     setChat: React.Dispatch<React.SetStateAction<Chat | null>>,
-    setMessage: React.Dispatch<React.SetStateAction<string[]>>,
-    HandleAddMessage: (message: string) => void, 
+    setMessage: React.Dispatch<React.SetStateAction<Message[]>>,
     sendMessage: (message: string) => void,
 }

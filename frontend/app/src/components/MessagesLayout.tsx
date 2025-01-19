@@ -9,9 +9,8 @@ import Scrollbar from "./custom/Scrollbar.tsx";
 export default function MessagesLayout() {
     const { chat } = useContext(WebsocketContext);
     const { user } = useContext(AuthContext);
-    const messages = chat?.messages || [];
 
-    messages.forEach(message => console.log(message));
+    const messages = chat?.messages || [];
 
     return (
         <Box flex="1" width="100%" overflow="hidden">

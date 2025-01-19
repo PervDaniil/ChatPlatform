@@ -1,8 +1,8 @@
 import { Box, List, ListItem, ListItemAvatar, Badge, Avatar, Typography, ListItemText } from '@mui/material';
+import { WebsocketContext } from '../../providers/WebsocketProvider/WebsocketProvider.tsx';
 import useFetchChats from '../../hooks/useFetchChatsHook.ts';
 import Scrollbar from "../custom/Scrollbar.tsx";
 import React, { useContext } from "react";
-import { WebsocketContext } from '../../providers/WebsocketProvider/WebsocketProvider.tsx';
 
 
 export type Message = {
@@ -39,7 +39,6 @@ const SidebarChats = () => {
 
     const handleSelectChat = (chat: Chat) => {
         setChat(chat);
-        console.log(chat);
     }
 
     return (
@@ -66,7 +65,7 @@ const SidebarChats = () => {
                                     invisible={!true}
                                     anchorOrigin={{ vertical: 'bottom' }}
                                 >
-                                    <Avatar />
+                                    <Avatar src={`http://127.0.0.1:8000${chat.image}` || 'Chat'}/>
                                 </Badge>
                             </ListItemAvatar>
                             <ListItemText>

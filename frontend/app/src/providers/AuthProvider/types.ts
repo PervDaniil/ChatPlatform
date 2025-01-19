@@ -1,6 +1,8 @@
 export interface User {
     id: number,
     username: string,
+    last_login: string, 
+    online: boolean,
 }
 
 export interface AuthProviderContextValue {
