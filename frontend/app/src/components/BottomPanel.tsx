@@ -27,9 +27,19 @@ const MessageInputField = () => {
         setMessage(event.target.value);
     }
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter' && message.trim()) {
+            HandleAddMessage(message);
+            sendMessage(message);
+            setMessage('');
+        }
+    }
+
     return (
         <RoundedTextField size="medium" placeholder="Type message here ..."
+            value={message}
             onChange={handleInput}
+            onKeyDown={handleKeyDown}
             endAdornment={
                 <InputAdornment position="start" sx={{ gap: '0 0.75em' }}>
                     <IconButton>

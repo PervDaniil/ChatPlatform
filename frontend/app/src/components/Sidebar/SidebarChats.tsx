@@ -45,7 +45,7 @@ const SidebarChats = () => {
     return (
         <Box>
             <Scrollbar onlyHover={true} height="calc(70vh + 20px)">
-                <List>
+                <List sx={{ p: 2 }}>
                     {chats.map((chat: Chat) => (
                         <ListItem
                             key={chat.id}
