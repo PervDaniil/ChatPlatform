@@ -15,7 +15,7 @@ export default function Header() {
                     <Avatar sx={{ mr: 5, width: '2.5em', height: '2.5em' }} />
                     <Box flex="1">
                         <Typography variant="h6" fontFamily="Bruno Ace">{ chat?.name } </Typography>
-                        <Typography variant="body2" color="textSecondary">Last seen 21 minutes ago</Typography>
+                        <Typography variant="body2" color="textSecondary">{ chat?.messages[0]?.time|| '...' }</Typography>
                     </Box>
                     <FlexRow styles={{ gap: '0 1em' }}>
                         <IconButton sx={{ background: 'rgba(150, 150, 150, 0.1)' }}>

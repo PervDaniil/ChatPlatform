@@ -3,32 +3,7 @@ import { WebsocketContext } from '../../providers/WebsocketProvider/WebsocketPro
 import useFetchChats from '../../hooks/useFetchChatsHook.ts';
 import Scrollbar from "../custom/Scrollbar.tsx";
 import React, { useContext } from "react";
-
-
-export type Message = {
-    id: number,
-    text: string,
-    time: string,
-    sender: Member,
-}
-
-
-export type Member = {
-    id: number,
-    username: string,
-    last_login: string,
-    online: boolean,
-}
-
-
-export type Chat = {
-    id: number,
-    name: string,
-    private: boolean,
-    members: Member[],
-    messages: Message[],
-    image: string | null,
-}
+import { Chat } from './types.ts';
 
 
 const SidebarChats = () => {
@@ -48,33 +23,24 @@ const SidebarChats = () => {
                     {chats.map((chat: Chat) => (
                         <ListItem
                             key={chat.id}
-                            onClick={() => handleSelectChat(chat)}
-                            sx={{
-                                '&:hover': {
-                                    cursor: 'pointer',
-                                    background: 'rgba(0, 0, 0, 0.25)',
-                                    borderRadius: '12px',
-                                },
-                                transition: 'all 0.1s',
-                            }}
-                        >
+                            sx={styles.hover}
+                            onClick={() => handleSelectChat(chat)}>
                             <ListItemAvatar>
                                 <Badge
                                     color="success"
                                     variant="dot"
                                     invisible={!true}
-                                    anchorOrigin={{ vertical: 'bottom' }}
-                                >
+                                    anchorOrigin={{ vertical: 'bottom' }}>
                                     <Avatar src={`http://127.0.0.1:8000${chat.image}` || 'Chat'}/>
                                 </Badge>
                             </ListItemAvatar>
                             <ListItemText>
                                 <Typography variant="body1">{chat.name}</Typography>
-                                <Typography variant="body2" color="textSecondary">
-                                    last message here
+                                <Typography variant="body2" color="textSecondary" textOverflow="ellipsis" overflow="hidden" sx={{ textWrap: 'nowrap', pr: 2 }}>
+                                    { chat?.messages[0]?.text || 'No messages yet'}
                                 </Typography>
                             </ListItemText>
-                            <Typography variant="body2" color="textSecondary" align="right">
+                            <Typography variant="body2" color="textSecondary" align="right" sx={{ textWrap: 'nowrap' }}>
                                 12:04 PM
                             </Typography>
                         </ListItem>
@@ -84,5 +50,16 @@ const SidebarChats = () => {
         </Box>
     );
 };
+
+const styles = {
+    hover: {
+        '&:hover': {
+            cursor: 'pointer',
+            background: 'rgba(0, 0, 0, 0.25)',
+            borderRadius: '12px',
+        },
+        transition: 'all 0.1s',
+    }
+}
 
 export default SidebarChats;
