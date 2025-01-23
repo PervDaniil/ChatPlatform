@@ -1,10 +1,23 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated
+from .serializers import CustomUserModelSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from api.users.models import CustomUser
 from django.db import IntegrityError
 from rest_framework import status
+
+
+class UsersView(APIView):
+    def get(self, request):
+        search = request.query_params.get('q')
+        queryset = CustomUser.objects.all()
+
+        if search:
+            queryset = queryset.filter(username__icontains=search)
+            
+        serializer = CustomUserModelSerializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class RegisterUserView(APIView):

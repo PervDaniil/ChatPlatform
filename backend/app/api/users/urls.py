@@ -1,5 +1,5 @@
 from rest_framework_simplejwt.views import TokenRefreshView, TokenBlacklistView, TokenObtainPairView
-from .views import RegisterUserView, UserCredentials
+from .views import RegisterUserView, UserCredentials, UsersView
 from django.urls import path
 
 
@@ -11,5 +11,6 @@ jwt_urlpatterns = [
 ]
 
 users_urlpatterns = [
+    path('', UsersView.as_view()),
     path('credentials/', UserCredentials.as_view()),
 ]
