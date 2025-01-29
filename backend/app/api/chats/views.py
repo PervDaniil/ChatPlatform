@@ -11,7 +11,7 @@ class ChatView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request):
-        queryset = Chat.objects.filter(members=request.user).prefetch_related('messages')
+        queryset = request.user.chats.prefetch_related('messages')
         serializer = ChatModelSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
