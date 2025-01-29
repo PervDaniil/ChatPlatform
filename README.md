@@ -4,7 +4,7 @@ ________________________________________________________________________________
 # Chat Platform - Real-Time Messaging
 
 A real-time chat platform that allows users to communicate instantly. Built with WebSocket protocol for live messaging and asynchronous request handling for fast interactions. Users can create, read, update, and delete chats, start private conversations, and search for chats and users.
-
+_________________________________________________________________________________________________________________________________________
 ### Features
 - **Real-Time Messaging**: Instant message delivery using WebSockets.
 - **Chat CRUD**: Users can create, update, and delete chats.
@@ -20,3 +20,4 @@ A real-time chat platform that allows users to communicate instantly. Built with
 - **AMQP (Message Broker)**: RabbitMQ
 - **Caching/Storage**: Redis, SQLite3
 - **Deployment**: Docker
+_________________________________________________________________________________________________________________________________________
