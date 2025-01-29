@@ -33,14 +33,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
         
     async def message(self, data):
         message: str = data['message']
+        sender: object = self.scope['user']
 
         await self.send(
             text_data = json.dumps({
-                'data' : message
+                'text' : message,
+                'sender' : {
+                    'id' : sender.id,
+                    'username' : sender.username,
+                    'last_login' : sender.last_login,
+                    'online' : sender.online,
+                }
             })
         )
-        
-    
-    async def save_to_database(self, data):
-        pass
-    

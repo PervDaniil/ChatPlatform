@@ -26,6 +26,9 @@ class ChatView(APIView):
         if user2 is None:
             return Response({'info' : 'Invalid user ID'}, status=status.HTTP_400_BAD_REQUEST)
         
+        if Chat.objects.filter(name__icontains=user2.username).exists():
+            return Response({ 'info' : f'Chat between {user2.username} and {request.user.username} already exists!'}, status=status.HTTP_400_BAD_REQUEST)
+        
         chat = Chat.objects.create(
             name = f'{request.user.username} {user2.username}',
             private = True,
