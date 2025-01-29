@@ -5,15 +5,14 @@ import React, { createContext, useContext, useEffect, useRef, useState } from "r
 
 export const WebsocketContext = createContext<WebsocketContextProviderValue>({
     chat: null,
-    messages: null,
-    setChat: () => {},
-    setMessage: () => {},
-    sendMessage: () => {},
+    messages: [],
+    setChat: () => { },
+    setMessage: () => { },
+    sendMessage: () => { },
 });
 
-export default function WebsocketProvider({ children } : { children : React.ReactNode}) {
+export default function WebsocketProvider({ children }: { children: React.ReactNode }) {
     const { accessToken } = useContext(AuthContext);
-    const [isSending, setIsSending] = useState<boolean>(false);
     const [messages, setMessage] = useState<Message[]>([]);
     const [chat, setChat] = useState<Chat | null>(null);
     const webSocketRef = useRef<WebSocket | null>(null);
@@ -21,36 +20,44 @@ export default function WebsocketProvider({ children } : { children : React.Reac
 
     const sendMessage = (message) => {
         if (webSocketRef.current && webSocketRef.current.readyState === WebSocket.OPEN) {
-            if (isSending) {
-                webSocketRef.current.send(message);
-                setMessage((prev) => ([
-                    ...prev, message
-                ]));
-            }
+            webSocketRef.current.send(message);
+
         } else {
             console.log('Failed to open WS connection!')
         }
     }
 
 
+    useEffect(() => {
+        const messagesFromChat = chat?.messages || [];
+        setMessage(messagesFromChat);
+    }, [chat]);
+
 
     useEffect(() => {
         if (chat) {
             const webSocket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${chat?.id}/?jwt_token=${accessToken}`);
             webSocketRef.current = webSocket;
-    
+
             webSocket.onmessage = (event) => {
-                const message = JSON.parse(event.data);
-                setMessage((prev) => ([
-                    ...prev, message
-                ]))
+                const data = JSON.parse(event.data);
+
+                setMessage((prev) => [...prev, {
+                    text: data.text,
+                    sender: data.sender,
+                }]);
+            }
+
+            return () => {
+                webSocket.close();
             }
         }
-    });
+
+    }, [chat]);
 
     return (
         <WebsocketContext.Provider value={{ chat, messages, setChat, setMessage, sendMessage }}>
-            { children }
+            {children}
         </WebsocketContext.Provider>
     )
 }

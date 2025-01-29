@@ -2,10 +2,10 @@ import React from "react";
 
 
 export type Message = {
-    id: number,
+    // id: number,
     text: string,
-    time: string,
-    sender: Member,
+    // time: string,
+    sender: Member | null,
 }
 
 
@@ -29,7 +29,7 @@ export type Chat = {
 
 export interface WebsocketContextProviderValue {
     chat: Chat | null,
-    messages: Message[] | null,
+    messages: Message[] | [],
     setChat: React.Dispatch<React.SetStateAction<Chat | null>>,
     setMessage: React.Dispatch<React.SetStateAction<Message[]>>,
     sendMessage: (message: string) => void,

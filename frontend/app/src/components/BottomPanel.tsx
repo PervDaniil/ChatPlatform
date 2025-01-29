@@ -22,7 +22,7 @@ export default function BottomPanel() {
 
 const MessageInputField = () => {
     const { user } = useContext(AuthContext);
-    const { setMessage, sendMessage } = useContext(WebsocketContext);
+    const { sendMessage } = useContext(WebsocketContext);
     const [inputValue, setInputValue] = useState<string>('');
 
     const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +31,6 @@ const MessageInputField = () => {
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && inputValue.trim()) {
-            if (user) {
-                setMessage((prev) => ([
-                    ...prev, {
-                        id: 1,
-                        text: inputValue,
-                        time: Date().toString(),
-                        sender: user,
-                    }
-                ]));
-            }
             sendMessage(inputValue);
             setInputValue('');
         }

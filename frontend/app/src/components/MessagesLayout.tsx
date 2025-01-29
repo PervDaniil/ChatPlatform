@@ -7,16 +7,16 @@ import Scrollbar from "./custom/Scrollbar.tsx";
 
 
 export default function MessagesLayout() {
-    const { chat } = useContext(WebsocketContext);
+    const { messages } = useContext(WebsocketContext);
     const { user } = useContext(AuthContext);
 
-    const messages = chat?.messages || [];
+    const messages2 = messages || [];
 
     return (
         <Box flex="1" width="100%" overflow="hidden">
             <Scrollbar onlyHover={false}>
                 <FlexColumn styles={{ gap: '1.5em', padding: '2.5em', paddingBottom: '7.5em' }}>
-                        {messages.map((message) => (
+                        {messages2.map((message) => (
                             <Fragment key={message.id}>
                                 {message.sender.username === user?.username ? (
                                     <Card key={message.id} sx={styles.message}>

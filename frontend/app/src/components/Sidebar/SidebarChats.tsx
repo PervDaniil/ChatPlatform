@@ -14,12 +14,14 @@ const SidebarChats = () => {
 
     const showChatName = (chat: Chat) => {
         if (chat.private) {
-            return (
-                chat.members[0].username === user?.username ?
-                chat.members[1].username :
-                chat.members[0].username
-
-            )
+            if (chat.members[0] && chat.members[1]) {
+                return (
+                    chat.members[0].username === user?.username ?
+                    chat.members[1].username :
+                    chat.members[0].username
+    
+                )
+            }
         }
 
         return chat.name;
