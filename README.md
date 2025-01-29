@@ -13,7 +13,7 @@ ________________________________________________________________________________
 - **Modern UI**: Built with React and Material-UI (MUI), supporting light/dark theme modes.
 - **Asynchronous Backend**: Handled by Django, Celery, and RabbitMQ for scalability.
 - **Dockerized**: Containerized app for easy deployment.
-
+_________________________________________________________________________________________________________________________________________
 ### Tech Stack
 - **Frontend**: React, TypeScript, MUI, Framer Motion, React DOM
 - **Backend**: Django, JWT, Celery, WebSockets (Django Channels), DRF
