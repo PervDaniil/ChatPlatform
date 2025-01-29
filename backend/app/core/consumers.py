@@ -1,4 +1,5 @@
 import json
+from core.tasks import save_chat_message
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 
@@ -35,6 +36,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message: str = data['message']
         sender: object = self.scope['user']
 
+        await save_chat_message(message, sender, self.chat_room)
+
         await self.send(
             text_data = json.dumps({
                 'text' : message,
@@ -46,3 +49,4 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             })
         )
+        

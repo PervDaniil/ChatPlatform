@@ -139,4 +139,10 @@ SIMPLE_JWT = {
     "SIGNING_KEY": config.SECRET_KEY,
 }
 
+CELERY_ACCEPT_CONTENT = ['json']
+
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
