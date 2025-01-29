@@ -1,7 +1,7 @@
 _________________________________________________________________________________________________________________________________________
 ![screencapture-localhost-3000-chat-2025-01-14-19_55_01](https://github.com/user-attachments/assets/3a8ef4ce-d550-4616-af8a-b64076f934d5)
 _________________________________________________________________________________________________________________________________________
-## Chat Platform - Real-Time Messaging
+# Chat Platform - Real-Time Messaging
 
 A real-time chat platform that allows users to communicate instantly. Built with WebSocket protocol for live messaging and asynchronous request handling for fast interactions. Users can create, read, update, and delete chats, start private conversations, and search for chats and users.
 
